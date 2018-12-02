@@ -1,0 +1,21 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/config.2.0.schema.json",
+  "version": "2.0",
+  "bundles": {
+    "my-first-web-part-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/myFirstWebPart/MyFirstWebPartWebPart.js",
+          "manifest": "./src/webparts/myFirstWebPart/MyFirstWebPartWebPart.manifest.json"
+        }
+      ]
+    }
+  },
+  "externals": {
+    
+  },
+  "localizedResources": {
+    "MyFirstWebPartWebPartStrings": "lib/webparts/myFirstWebPart/loc/{locale}.js",
+    "PropertyControlStrings": "node_modules/@pnp/spfx-property-controls/lib/loc/{locale}.js"
+  }
+}
