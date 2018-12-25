@@ -16,11 +16,11 @@
   "preconfiguredEntries": [{
     "groupId": "5c03119e-3074-46fd-976b-c60198311f70", // Other
     "group": { "default": "Other" },
-    "title": { "default": "GreetingWP" },
-    "description": { "default": "GreetingWP description" },
-    "officeFabricIconFontName": "Page",
+    "title": { "default": "Greeting Web Part" },
+    "description": { "default": "Greeting Web Part description" },
+    "officeFabricIconFontName": "ContactCardSettings",
     "properties": {
-      "description": "GreetingWP"
+      "description": "Greeting Web Part"
     }
   }]
 }

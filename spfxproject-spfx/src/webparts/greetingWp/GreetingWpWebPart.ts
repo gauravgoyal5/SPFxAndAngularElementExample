@@ -19,6 +19,7 @@ export interface IGreetingWpWebPartProps {
 
 export default class GreetingWpWebPart extends BaseClientSideWebPart<IGreetingWpWebPartProps> {
 
+
   public constructor() {
     super();
     //Modify with your a CDN or local path
@@ -26,7 +27,9 @@ export default class GreetingWpWebPart extends BaseClientSideWebPart<IGreetingWp
   }
 
   public render(): void {
-    this.domElement.innerHTML = `<app-greeting-wp-web-part user-name="${ this.properties.description }"></app-greeting-wp-web-part>`;
+    let env=(Environment.type==EnvironmentType.ClassicSharePoint || Environment.type==EnvironmentType.SharePoint) ? true : false;
+    console.log(env);
+        this.domElement.innerHTML = `<app-greeting-wp-web-part issharepoint=${env} ></app-greeting-wp-web-part>`;
   }
 
   protected get dataVersion(): Version {

@@ -8,4 +8,5 @@ const concat = require('concat');
     './dist/spfxproject/main.js'
   ];
   await concat(files, './dist/spfxproject/bundle.js');
+  
 })();

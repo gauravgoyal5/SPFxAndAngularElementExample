@@ -1,23 +1,27 @@
-import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, Input, OnInit, ViewEncapsulation,ChangeDetectorRef } from '@angular/core';
+import { GreetingService } from './greeting.service';
+//import { sp, Web } from "@pnp/sp";
 
 @Component({
   selector: 'app-greeting-wp-web-part',
   templateUrl: './greeting-wp-web-part.component.html',
   styleUrls: ['./greeting-wp-web-part.component.scss'],
-  encapsulation: ViewEncapsulation.None
+  encapsulation: ViewEncapsulation.None,
+  providers: [GreetingService],
 })
 export class GreetingWpWebPartComponent implements OnInit {
-  @Input() userName: string = "";
-  @Input() userJobTitle: string = "";
-  @Input() webSiteTitle: string = "";
-  @Input() welComeMessage: string = "";
-  @Input() userImageUrl: string="";
+  public userName: string = "";
+  public userJobTitle: string = "";
+  public webSiteTitle: string = "";
+  public welComeMessage: string = "";
+  public userImageUrl: string = "";
+  @Input() issharepoint: boolean = false;
 
-  greetingMessage: string = "";
-  prefixWelcomeMessage: string = "Welcome to ";
-  constructor() {
+  public greetingMessage: string = "";
+  public prefixWelcomeMessage: string = "Welcome to ";
+  constructor(private greetingService: GreetingService, private cd: ChangeDetectorRef) {
     console.log(this.userImageUrl);
-   }
+  }
 
   ngOnInit() {
 
@@ -36,10 +40,36 @@ export class GreetingWpWebPartComponent implements OnInit {
 
     if (this.welComeMessage.length == 0) this.welComeMessage = this.greetingMessage + this.userName;
 
-    if(this.userImageUrl.length==0) this.userImageUrl="https://miro.medium.com/max/2400/1*vmWLIgxv98WCdZ1yKkiNeA.jpeg";
+    if (this.userImageUrl.length == 0) this.userImageUrl = "https://miro.medium.com/max/2400/1*vmWLIgxv98WCdZ1yKkiNeA.jpeg";
 
-    console.log(this.userImageUrl);
+    if (this.issharepoint) {
+      this.getCurrentUserInformation();
+      console.log('----------------------------');
+      console.log(this.webSiteTitle);
+      console.log(this.userImageUrl);
+      console.log(this.userJobTitle);
+      console.log(this.userName);
+      console.log('----------------------------');
+    }
 
   }
+  public getCurrentUserInformation() {
 
+    this.greetingService.getCurrentUserInformation().then(ig => {
+      this.webSiteTitle =this.prefixWelcomeMessage+ ig.webSiteTitle;
+      this.userImageUrl = ig.userImageUrl;
+      this.userName = ig.userName;
+      this.userJobTitle = ig.userJobTitle;
+
+      console.log(this.webSiteTitle);
+      console.log(this.userImageUrl);
+      console.log(this.userJobTitle);
+      console.log(this.userName);
+
+      this.cd.detectChanges();
+    });
+
+
+
+  }
 }
